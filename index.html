@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronique Familiale - Marens Castelamourou</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background-color: #f7f4ee;
+            color: #2c241e;
+        }
+        .font-title {
+            font-family: 'Cinzel', serif;
+        }
+        .font-heading {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        .paper-bg {
+            background-color: #fcfaf7;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            border: 1px solid #e8e2d5;
+        }
+        .drop-cap::first-letter {
+            font-family: 'Cinzel', serif;
+            float: left;
+            font-size: 3.8rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-bottom: 2px;
+            color: #8c2a1c;
+            font-weight: 700;
+        }
+        .vintage-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .vintage-divider::before, .vintage-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #d4c8b5;
+        }
+        .vintage-divider span {
+            padding: 0 1rem;
+            color: #8c2a1c;
+            font-size: 1.2rem;
+        }
+
+        /* Cadres pour les photographies familiales */
+        .photo-card {
+            background-color: #f4efe6;
+            border: 1px solid #d8cea8;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .photo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .photo-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            background-color: #1f1b18;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="py-8 px-4 sm:px-6 lg:px-8">
+
+    <!-- Barre d'outils / navigation -->
+    <div class="max-w-4xl mx-auto mb-6 flex justify-between items-center text-sm text-amber-900 border-b border-amber-200 pb-3">
+        <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5 text-amber-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            <span class="font-semibold tracking-wider uppercase text-xs">Archives Familiales Numériques</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button onclick="toggleAudio()" id="audioBtn" class="flex items-center space-x-1 hover:text-amber-700 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                </svg>
+                <span id="audioText">Écouter la lecture</span>
+            </button>
+            <button onclick="window.print()" class="hover:text-amber-700 transition flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                <span>Imprimer / PDF</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Document Principal -->
+    <main class="max-w-4xl mx-auto paper-bg p-8 sm:p-14 rounded-lg relative overflow-hidden">
+        
+        <!-- En-tête -->
+        <header class="text-center mb-12">
+            <p class="font-title text-sm tracking-widest text-amber-900 uppercase mb-1">« Marens »</p>
+            <h1 class="font-title text-3xl sm:text-4xl text-amber-950 font-bold tracking-wide mb-3">Castelamourou</h1>
+            <div class="vintage-divider">
+                <span>✦</span>
+            </div>
+            <p class="font-heading italic text-lg sm:text-xl text-stone-700 max-w-2xl mx-auto">
+                « C'est seulement à partir des années 1860 que je peux vous parler des Nôtres. »
+            </p>
+        </header>
+
+        <!-- Chapitre 1 : Prosper DURAND -->
+        <article class="mb-14" id="prosper-section">
+            <h2 class="font-heading text-2xl text-amber-900 border-b border-amber-200 pb-2 mb-6 font-semibold flex items-center justify-between">
+                <span>Côté Prosper DURAND</span>
+                <span class="text-sm font-normal italic text-stone-500">(Grand'père de René)</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-6">
+                <!-- Texte partie 1 -->
+                <div class="md:col-span-7 space-y-4 text-justify text-lg leading-relaxed">
+                    <p class="drop-cap">
+                        Son père était agent de change à Lyon. Quand il a beaucoup trop misé sur les sucres il a tout perdu, et là, il a pris la décision de rembourser et quitter Lyon avec ses livres.
+                    </p>
+                    <p>
+                        Il avait une belle bibliothèque. Un oncle lui avait avancé <strong class="font-semibold text-amber-950">100 F</strong>, et en <strong class="font-semibold text-amber-950">1860 environ</strong>, il est parti s'installer dans le <em class="italic">1ᵉʳ Quartier Européen d'Alger</em>, rue Dumont DURVILLE où il a ouvert un cabinet de lecture.
+                    </p>
+                    <p>
+                        Prosper et sa sœur avaient une douzaine d'années. C'est en bateau à voiles que Prosper a été passer son baccalauréat à Lyon avec Warot dont le père était dans les Bois (Entreprise). Inutile de vous dire qu'ils ont été collés tous les deux.
+                    </p>
+                </div>
+
+                <!-- Photographie 1 : Prospère Durant_3.jpg -->
+                <figure class="md:col-span-5 photo-card p-3 rounded">
+                    <img src="Prospère Durant_3.jpg" 
+                         alt="Portrait de Prosper Durand - Studio P. Vollenweider-Borgeaud à Alger" 
+                         class="photo-img rounded shadow-inner"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x800/2c241e/e8e2d5?text=Prosper+DURAND%0A(Prosp%C3%A8re+Durant_3.jpg)';">
+                    <figcaption class="mt-3 text-xs text-stone-600 italic text-center">
+                        <strong class="block not-italic font-semibold text-amber-900 mb-0.5">Portrait I : Prosper DURAND</strong>
+                        Studio P. Vollenweider-Borgeaud, 2 Rue Dumont d'Urville à Alger.
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="space-y-4 text-justify text-lg leading-relaxed">
+                <p>
+                    Et c'est ensuite que Prosper a monté son affaire de charbon. Au début, il livrait ses sacs à bicyclette. Vous savez qu'ensuite c'était la plus grosse affaire d'Alger. Import, export avec l'Angleterre et autres pays, grâce à sa flotte de bateaux. Il s'est beaucoup serré toute sa vie, même quand il avait réussi et il avait une très grosse fortune.
+                </p>
+                <p>
+                    Il avait épousé une <strong class="font-semibold text-amber-950">THOMARON</strong>, famille de six enfants. Elle avait à peine 16 ans, originaire de Paris. Elle racontait toujours que le jour de son mariage, c'est elle qui s'occupait d'habiller son petit frère Pierre THOMARON qui avait trois ans.
+                </p>
+                <p>
+                    Le Grand'père Prosper a fait <strong class="font-semibold text-amber-950">7 ans sous les drapeaux</strong>. Il a assisté à la bataille de l'ALMA contre une révolte arabe. Il est mort de vieillesse à 84 ans. Il était franc-maçon de la Grande Loge, mais a demandé un enterrement religieux. Grand'mère s'appelait Antoinette. Ils habitaient une belle maison mauresque dans la montagne de St Eugène, derrière chez nous.
+                </p>
+            </div>
+        </article>
+
+        <div class="vintage-divider">
+            <span>✦ ✦ ✦</span>
+        </div>
+
+        <!-- Chapitre 2 : Les FINE -->
+        <article class="mb-10" id="fine-section">
+            <h2 class="font-heading text-2xl text-amber-900 border-b border-amber-200 pb-2 mb-6 font-semibold flex items-center justify-between">
+                <span>La Branche FINE</span>
+                <span class="text-sm font-normal italic text-stone-500">(Ferdinand, Henri & Léonie)</span>
+            </h2>
+
+            <p class="italic text-stone-600 mb-6 bg-amber-50/80 p-3 rounded-md border-l-4 border-amber-700 text-base">
+                « Pour les FINE je sais peu de chose, car ils sont tous morts très jeunes. »
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Photographie 2 : Ferdinant Durant.jpg -->
+                <figure class="md:col-span-5 md:order-last photo-card p-3 rounded">
+                    <img src="Ferdinant Durant.jpg" 
+                         alt="Portrait de Ferdinand Fine (Ferdinant Durant.jpg)" 
+                         class="photo-img rounded shadow-inner"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x800/3d2b1f/e8e2d5?text=Ferdinand+FINE%0A(Ferdinant+Durant.jpg)';">
+                    <figcaption class="mt-3 text-xs text-stone-600 italic text-center">
+                        <strong class="block not-italic font-semibold text-amber-900 mb-0.5">Portrait II : Ferdinand FINE</strong>
+                        Directeur de la Banque de l'Algérie à Tlemcen.
+                    </figcaption>
+                </figure>
+
+                <!-- Texte partie 2 -->
+                <div class="md:col-span-7 space-y-4 text-justify text-lg leading-relaxed">
+                    <p class="drop-cap">
+                        Le Grand'père Ferdinand était directeur de la banque de l'Algérie à Tlemcen. Il a épousé une <strong class="font-semibold text-amber-950">TREMERELLE</strong> d'Oran où ils avaient de belles propriétés. Mais le Grand'père vers 40 - 42 ans a eu un cancer à la gorge ; on lui a fait une trachéotomie, cela l'a un peu prolongé. Il est enterré à Alger au Bd Bru, sans tombeau.
+                    </p>
+                    <p>
+                        La Grand'mère, à la fin de sa vie, n'avait pas de retraite, c'est Prosper DURAND qui l'aidait ainsi que son fils. 
+                    </p>
+                    <p>
+                        <strong class="font-semibold text-amber-950">Henri FINE</strong> (père de René), très jeune sous-directeur de l'Agriculture, a été à trente-cinq ans Directeur des Travaux Publics.
+                    </p>
+                    <p>
+                        Pendant la guerre de 1914 il a attrapé la gale, et surtout une furonculose qui l'a emporté en 1919. Il avait épousé Léonie DURAND, ravissante, et qui était votre Grand'mère, la maman de René. Papy Maurice GRANGER l'aimait beaucoup, comme une amie rieuse et qui lui enlevait un peu sa grande timidité.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Pied de page -->
+        <footer class="mt-16 pt-6 border-t border-amber-200/80 flex justify-between items-center text-xs text-stone-500">
+            <span class="font-title tracking-widest uppercase">Mémoires d'Histoire Familiale</span>
+            <span class="font-heading font-bold text-base text-amber-900">─ Page 3 ─</span>
+            <span class="italic">Archives & Généalogie</span>
+        </footer>
+
+    </main>
+
+    <!-- Script de Synthèse Vocale -->
+    <script>
+        let synth = window.speechSynthesis;
+        let isSpeaking = false;
+
+        function toggleAudio() {
+            if (!synth) {
+                return;
+            }
+
+            const btnText = document.getElementById('audioText');
+
+            if (isSpeaking) {
+                synth.cancel();
+                isSpeaking = false;
+                btnText.innerText = "Écouter la lecture";
+            } else {
+                const textToRead = document.querySelector('main').innerText;
+                const utterance = new SpeechSynthesisUtterance(textToRead);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.95;
+
+                utterance.onend = () => {
+                    isSpeaking = false;
+                    btnText.innerText = "Écouter la lecture";
+                };
+
+                synth.speak(utterance);
+                isSpeaking = true;
+                btnText.innerText = "Arrêter la lecture";
+            }
+        }
+    </script>
+</body>
+</html>
